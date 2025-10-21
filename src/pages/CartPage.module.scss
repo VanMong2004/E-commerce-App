@@ -1,0 +1,157 @@
+.container {
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: #fdfdfd;
+  border-radius: 16px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.empty {
+  text-align: center;
+  font-size: 18px;
+  color: #777;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  padding: 16px;
+  gap: 20px;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+  }
+}
+
+.img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+}
+
+.info {
+  flex: 1;
+
+  h3 {
+    font-size: 18px;
+    margin-bottom: 5px;
+    color: #222;
+  }
+
+  p {
+    margin: 3px 0;
+    color: #555;
+  }
+
+  button {
+    background-color: #ff4444;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 12px;
+    cursor: pointer;
+    transition: background 0.2s;
+
+    &:hover {
+      background-color: #e53935;
+    }
+  }
+}
+
+.quantityBox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+
+  button {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background 0.2s;
+
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+
+  span {
+    font-size: 16px;
+    font-weight: 600;
+  }
+}
+
+.summary {
+  text-align: right;
+  margin-top: 20px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #222;
+}
+
+.groupBtn {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.clearBtn {
+  display: block;
+  margin: 30px auto 0;
+  background-color: #ff4d4f;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background-color: #d9363e;
+  }
+}
+
+.checkout {
+  display: block;
+  margin: 30px auto 0;
+  background-color: #ff4d4f;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background-color: #d9363e;
+  }
+}

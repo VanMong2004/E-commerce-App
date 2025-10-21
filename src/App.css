@@ -1,0 +1,44 @@
+/* Reset nhẹ để mọi trình duyệt hiển thị đồng nhất */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+body {
+  background-color: #f6f7fb;
+  color: #222;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* Container mặc định cho các trang */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+/* Tiêu đề chính */
+h1, h2, h3 {
+  color: #222;
+}
+
+/* Nút chung */
+button {
+  font-family: inherit;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+/* Scrollbar gọn gàng hơn */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
