@@ -1,23 +1,31 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { useAuth } from "./AuthContext";
 // Tạo context
 export const CartContext = createContext();
 
-// export const useCarts = () => useContext(CartContext);
 // Tạo Provider
 export function CartProvider({ children }) {
+  const { user } = useAuth();
   const [carts, setCarts] = useState([]);
 
-  // 🔹 Khi app load, lấy giỏ hàng từ localStorage
+  // 🔹 Khi user đổi hoặc app load, lấy giỏ hàng đúng của user đó
   useEffect(() => {
-    const storedCart = JSON.parse(localStorage.getItem("carts")) || [];
+    if (!user) {
+      setCarts([]); // nếu chưa đăng nhập thì giỏ hàng trống
+      return;
+    }
+    const key = `carts_${user.email}`;
+    const storedCart = JSON.parse(localStorage.getItem(key)) || [];
     setCarts(storedCart);
-  }, []);
+  }, [user]);
 
-  // 🔹 Mỗi khi giỏ hàng thay đổi → lưu lại vào localStorage
+  // 🔹 Khi giỏ hàng thay đổi thì lưu lại theo user hiện tại
   useEffect(() => {
-    localStorage.setItem("carts", JSON.stringify(carts));
-  }, [carts]);
+    if (!user) return;
+    const key = `carts_${user.email}`;
+    localStorage.setItem(key, JSON.stringify(carts));
+  }, [carts, user]);
 
   // Hàm thêm vào giỏ hàng
   const addToCart = (product) => {
@@ -33,13 +41,10 @@ export function CartProvider({ children }) {
         );
       } else {
         toast.success(`✅ Đã thêm "${product.title}" vào giỏ hàng`);
-        return [...prev, { ...product}];
+        return [...prev, { ...product, quantity: product.quantity || 1 }];
       }
     });
   };
-
-  useEffect(() => console.log(carts)
-  )
 
   // Hàm tằng số lượng
   const increaseQuantity = (id) => {
@@ -88,3 +93,5 @@ export function CartProvider({ children }) {
     </CartContext.Provider>
   );
 }
+
+// export const useCarts = () => useContext(CartContext);

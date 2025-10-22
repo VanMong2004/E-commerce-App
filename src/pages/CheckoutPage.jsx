@@ -1,13 +1,17 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { CartContext } from "../context/CartContext";
 import { toast } from "react-toastify";
 import { Bounce } from "react-toastify";
 import styles from "./CheckoutPage.module.scss";
 import classNames from "classnames/bind";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const cx = classNames.bind(styles);
 
 export default function CheckoutPage() {
+  const navigate = useNavigate();
+  const { user } = useAuth();
   const { carts, clearCart } = useContext(CartContext);
   const [form, setForm] = useState({
     name: "",
@@ -15,6 +19,13 @@ export default function CheckoutPage() {
     address: "",
     phone: "",
   });
+
+  useEffect(() => {
+    if (!user) {
+      toast.error("Vui lòng đăng nhập");
+      navigate("/login");
+    }
+  }, [user, navigate]);
 
   const total = carts
     .reduce((sum, item) => sum + item.price * item.quantity, 0)
@@ -33,15 +44,15 @@ export default function CheckoutPage() {
       return;
     }
     const orders = {
-        id: Date.now(),
-        items: carts,
-        total,
-        user: form,
-        date: new Date().toLocaleString()
-    }
+      id: Date.now(),
+      items: carts,
+      total,
+      user: form,
+      date: new Date().toLocaleString(),
+    };
 
-    const existingOrders = JSON.parse(localStorage.getItem('orders')) || []
-    localStorage.setItem('orders', JSON.stringify([...existingOrders, orders]))
+    const existingOrders = JSON.parse(localStorage.getItem("orders")) || [];
+    localStorage.setItem("orders", JSON.stringify([...existingOrders, orders]));
 
     toast.success("Đặt hàng thành công 🎉! Cảm ơn bạn đã mua hàng.");
     clearCart();
